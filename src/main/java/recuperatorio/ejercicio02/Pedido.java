@@ -46,6 +46,7 @@ public class Pedido {
 		this.detalles = detalles;
 	}
 
+
 	public void addDetalle(Producto p, Integer c) {
 		if(this.detalles==null) this.detalles = new ArrayList<PedidoDetalle>();
 		this.detalles.add(new PedidoDetalle(c,p));

@@ -1,7 +1,9 @@
 package recuperatorio.ejercicio02;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Database {
 	
@@ -18,6 +20,20 @@ public class Database {
 			if(p.getId().equals(id)) return p;
 		}
 		return null;
+	}
+
+	public List<Producto> productosMontoMayor(Double montoMinimo,Double montoMaximo){
+		return _PRODUCTOS.stream().filter(producto -> producto.getPrecio()>montoMinimo)
+				.filter(producto -> producto.getPrecio()<montoMaximo)
+				.sorted((p1, p2)->p1.getPrecio().compareTo(p2.getPrecio()))
+				.collect(Collectors.toList());
+	}
+
+	public Double precioMedio(){
+		return _PRODUCTOS.stream()
+				.mapToDouble(Producto::getPrecio)
+				.average()
+				.getAsDouble();
 	}
 	
 }

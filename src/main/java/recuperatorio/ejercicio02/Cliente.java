@@ -29,11 +29,9 @@ public class Cliente {
 	}
 	
 	public void agregarProducto(Integer nroPedido, Integer idProducto,Integer cantidad) throws BusquedaProductoException, DatabaseException, StockInsuficienteException, MaximoProductosAlcanzadoException {
+	try{
 
 		Producto p = Database.buscarProducto(idProducto);
-		if(p == null){
-			throw new BusquedaProductoException();
-		}
 		// verificar si el stock existente alcanza para agregarlo al pedido
 		// verificar si el cliente cumple la condicion pedida para agregar el producto
 		if(p.getStock() >= cantidad){
@@ -46,6 +44,9 @@ public class Cliente {
 		} else {
 			throw new StockInsuficienteException();
 		}
+	} catch (DatabaseException e){
+		throw new BusquedaProductoException();
+	}
 
 	}
 	
